@@ -1,0 +1,21 @@
+
+/*Page d'accueil*/
+.accueil-titre {
+    text-align: center;
+    text-justify: auto;
+}
+
+
+/* Page register / log*/
+
+.compte{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+}
+
+.foot-log-register {
+    background-color: red;
+}

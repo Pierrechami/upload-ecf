@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Job{% endblock %}
+
+{% block body %}
+    <h1>Vous êtes sur le point de postuler à l'offre</h1>
+
+    {{ include('candidate_job/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+
+    <a href="{{ path('candidate_job_index') }}" class="float-end">Retour a la liste</a>
+
+{% endblock %}

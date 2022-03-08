@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block title %}Job candidats{% endblock %}
+{% block body %}
+
+    <h1>Liste des annonces pour lesquelles les candidats ont postulé</h1>
+    {% for job in jobs %}
+
+        <p>Pour l'annonce de "<strong>{{ job.title }}</strong>", qui début en date du
+            <strong>{{ job.startDate ? job.startDate|date('d-m-Y') : '' }}</strong>. </p>
+        {% if job.candidates is empty %}
+            <div>
+                <p><strong>Aucun candidat n'a postulé à ce job pour le moment.</strong></p>
+            </div>
+        {% endif %}
+        {% for candidate in job.candidates %}
+            <ul>
+                <li>
+                    Prenom : {{ candidate.firstName }}
+                </li>
+                <li>
+                    Nom : {{ candidate.name }}
+                </li>
+                <li>
+                    CV : <a href="{{ asset('uploads/' ~ candidate.cv) }}" target="_blank">Afficher</a>
+                </li>
+            </ul>
+        {% endfor %}
+
+    {% endfor %}
+
+
+{% endblock %}

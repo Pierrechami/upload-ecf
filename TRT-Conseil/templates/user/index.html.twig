@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+    <div>
+        <p>Afin de faciliter vos recherches, vous pouvez vous rendre directement vers les <a href="#job-non-accepte">Jobs
+                non acceptés</a> ou vers les <a href="#Utilisateurs-non-acceptés">Utilisateurs non acceptés</a> <a
+                    href="{{ path('app') }}" class=" float-end">Retour à la page d'accueil</a></p>
+    </div>
+
+    <h1 id="Utilisateurs-non-acceptés">Utilisateurs non acceptés </h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Utilisateur accepté</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            {% if user.roles != ["ROLE_ADMIN"] and user.roles != ["ROLE_CONSULTANT"] %}
+                {% if user.isAccepted == false %}
+                    <tr>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.roles == ["ROLE_ADMIN"] %}
+                            Administrateur
+                            {% elseif user.roles == ["ROLE_CONSULTANT"] %}
+                            Consultant
+                            {% elseif user.roles == ["ROLE_RECRUITEUR"] %}
+                            Recruteur
+                            {% elseif user.roles == ["ROLE_CANDIDAT"] %}
+                            Candidat
+                            {% else %}
+                            {{ user.roles ? user.roles|json_encode : '' }}</td>
+                        {% endif %}
+
+                        <td>{{ user.isAccepted ? 'Oui ✅' : 'Non ❌' }}</td>
+                        <td>
+                            <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-success">Modifier</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <h1>Utilisateurs acceptés</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Utilisateur accepté</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            {% if user.roles != ["ROLE_ADMIN"] and user.roles != ["ROLE_CONSULTANT"] %}
+                {% if user.isAccepted == true %}
+                    <tr>
+                        <td>{{ user.email }}</td>
+                        <td> {% if user.roles == ["ROLE_ADMIN"] %}
+                                Administrateur
+                            {% elseif user.roles == ["ROLE_CONSULTANT"] %}
+                                Consultant
+                            {% elseif user.roles == ["ROLE_RECRUITEUR"] %}
+                                Recruteur
+                            {% elseif user.roles == ["ROLE_CANDIDAT"] %}
+                                Candidat
+                            {% else %}
+                                {{ user.roles ? user.roles|json_encode : '' }}
+                            {% endif %}</td>
+                        <td>{{ user.isAccepted ? 'Oui ✅' : 'Non ❌' }}</td>
+                        <td>
+                            <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-success">Modifier</a>
+                        </td>
+                    </tr
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <h1 class="mt-5" id="job-non-accepte">Liste des annonces qui ont été acceptées par nos équipes :</h1>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Titre de l'annonce</th>
+            <th>Description du Poste</th>
+            <th>Lieu</th>
+            <th>Type de contrat</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Nombre d'heures semaine</th>
+            <th>Salaires mensuel</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            {% if job.isAccepted == true %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.description }}</td>
+                    <td>{{ job.place }}</td>
+                    <td>{{ job.typeContrat }}</td>
+                    <td>{{ job.startDate ? job.startDate|date('d-m-Y') : '' }}</td>
+                    <td>{{ job.endDate ? job.endDate|date('d-m-Y') : 'Pas de date de fin de contrat' }}</td>
+                    <td>{{ job.time }}</td>
+                    <td>{{ job.salary }}€</td>
+                    <td>
+                        <a href="{{ path('job_edit_consultant', {'id': job.id}) }}" class="btn btn-success">Modifier</a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+    <h1>Liste des annonces qui n'ont pas encore été acceptées par nos équipes :</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Titre de l'annonce</th>
+            <th>Description du Poste</th>
+            <th>Lieu</th>
+            <th>Type de contrat</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Nombre d'heures semaine</th>
+            <th>Salaires mensuel</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for job in jobs %}
+            {% if job.isAccepted == false %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.description }}</td>
+                    <td>{{ job.place }}</td>
+                    <td>{{ job.typeContrat }}</td>
+                    <td>{{ job.startDate ? job.startDate|date('d-m-Y') : '' }}</td>
+                    <td>{{ job.endDate ? job.endDate|date('d-m-Y') : 'Pas de date de fin de contrat' }}</td>
+                    <td>{{ job.time }}</td>
+                    <td>{{ job.salary }}</td>
+                    <td>
+                        <a href="{{ path('job_edit_consultant', {'id': job.id}) }}" class="btn btn-success">Modifier</a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <p><a href="{{ path('app') }}" class=" float-end">Retour à la page d'accueil</a></p>
+    </div>
+
+{% endblock %}

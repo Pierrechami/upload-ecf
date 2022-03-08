@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Job index{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <form action="{{ path('search') }}">
+        <input type="text" name="search"  placeholder="ex : Serveur">
+        <input type="submit"  value="Rechercher">
+    </form>
+
+
+
+    {% if jobs == [] %}
+        <h3>Il n'y a pas encore d'annonce de publié sur le site </h3>
+    {% else %}
+
+        <h1>Liste des annonces</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description du Poste</th>
+                <th>Lieu</th>
+                <th>Type de contrat</th>
+                <th>date de début</th>
+                <th>date de fin</th>
+                <th>Nombre d'heures</th>
+                <th>Salaire Mensuel</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for job in jobs %}
+                {% if job.isAccepted == true %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.description }}</td>
+                    <td>{{ job.place }}</td>
+                    <td>{{ job.typeContrat }}</td>
+                    <td>{{ job.startDate ? job.startDate|date('d-m-Y') : '' }}</td>
+                    <td>{{ job.endDate ? job.endDate|date('d-m-Y') : 'Pas de date de fin de contrat' }}</td>
+                    <td>{{ job.time }}</td>
+                    <td>{{ job.salary }} €</td>
+                    <td>
+                        <a href="{{ path('candidate_job_edit', {'id': job.id}) }}" class="btn btn-success">Postuler</a>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Enregister-vous{% endblock %}
+
+{% block body %}
+
+
+    <div class="container jsp">
+    <div class="row">
+        <div class="col-md-5 compte">
+            <h1>Je créais mon compte ! 👏</h1>
+        </div>
+        <div class="col-md-7 compte">
+            {{ form_start(registrationForm) }}
+            <p>{{ form_label(registrationForm.email) }} :</p>
+            <p>{{ form_widget(registrationForm.email) }}</p>
+            <p>{{ form_label(registrationForm.plainPassword) }} :</p>
+            <p>{{ form_widget(registrationForm.plainPassword) }}</p>
+            {{ form_errors(registrationForm.plainPassword) }}
+            <p>{{ form_row(registrationForm.roles) }}</p>
+            <p>{{ form_label(registrationForm.agreeTerms) }}  {{ form_widget(registrationForm.agreeTerms) }}</p>
+
+            <button type="submit" class="btn btn-primary">S'enregistrer</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+
+{% endblock %}
