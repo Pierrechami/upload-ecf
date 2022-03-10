@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c5a7be17-5dac-441b-9805-5be3b1759b25" name="Changes" comment="" />
+    <list default="true" id="c5a7be17-5dac-441b-9805-5be3b1759b25" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -223,6 +225,8 @@
       <workItem from="1646755850592" duration="1405000" />
       <workItem from="1646758833771" duration="783000" />
       <workItem from="1646812654396" duration="321000" />
+      <workItem from="1646900707334" duration="151000" />
+      <workItem from="1646932528230" duration="227000" />
     </task>
     <servers />
   </component>
